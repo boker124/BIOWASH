@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BIOWASH - Lavado ecológico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --green-light: #bfeacb; 
+      --green-dark: #0b6b3a;  
+      --sky-blue: #9fd7ff;    
+      --white: #ffffff;
+      --glass: rgba(255,255,255,0.6);
+      --card-shadow: 0 8px 20px rgba(11,107,58,0.12);
+      --radius: 14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial;
+      background:linear-gradient(180deg,var(--white) 0%, #f6fff7 100%);
+      color:var(--green-dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+    /* NAV */
+    header{position:sticky;top:0;z-index:90;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.6));backdrop-filter:blur(6px);box-shadow:0 6px 18px rgba(2,48,22,0.03)}
+    .nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:72px;width:72px;border-radius:12px;object-fit:cover;border:3px solid var(--green-light);box-shadow:var(--card-shadow)}
+    .brand h1{font-size:26px;margin:0;color:var(--green-dark);letter-spacing:0.4px}
+    nav a{margin-left:18px;text-decoration:none;color:var(--green-dark);font-weight:600}
+    .btn-primary{background:linear-gradient(90deg,var(--green-dark),#0f9251);color:var(--white);padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700;box-shadow:0 8px 24px rgba(11,107,58,0.12)}
+    /* HERO */
+    .hero{max-width:1200px;margin:28px auto;padding:28px;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .hero-card{background:linear-gradient(180deg,var(--white),var(--green-light));padding:28px;border-radius:18px;box-shadow:var(--card-shadow);border:1px solid rgba(11,107,58,0.06)}
+    .hero h2{margin:0 0 8px 0;font-size:32px;color:var(--green-dark)}
+    .hero p.lead{margin:0 0 16px 0;color:#235b3a;line-height:1.45}
+    .actions{display:flex;gap:12px}
+    .outline{background:transparent;border:2px solid var(--green-dark);padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer}
+    /* Sections */
+    section{max-width:1200px;margin:20px auto;padding:18px}
+    .wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .card{background:var(--white);padding:16px;border-radius:14px;border:1px solid rgba(11,107,58,0.04);box-shadow:0 6px 18px rgba(11,107,58,0.06)}
+    h3{margin-top:0}
+    .frame{padding:10px;border-radius:12px;background:linear-gradient(180deg,rgba(159,215,255,0.12),rgba(191,234,203,0.06));border:1px dashed rgba(11,107,58,0.06)}
+    .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .step{background:linear-gradient(180deg,var(--white),#f8fffb);padding:12px;border-radius:10px;border:1px solid rgba(11,107,58,0.06);text-align:center;cursor:pointer;transition:transform .28s ease, box-shadow .28s ease}
+    .step:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(11,107,58,0.08)}
+    .step img{width:100%;height:110px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,0.04)}
+    .catalog{display:flex;flex-direction:column;gap:12px}
+    .catalog img{width:100%;height:340px;object-fit:contain;border-radius:12px;border:1px solid rgba(11,107,58,0.06)}
+    /* IMAGE MODAL */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity .25s ease}
+    .overlay.open{opacity:1;pointer-events:auto}
+    .modal{max-width:90%;max-height:90%;position:relative}
+    .modal img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+    .close{position:absolute;top:-14px;right:-14px;background:var(--white);border:none;border-radius:50%;width:36px;height:36px;font-size:20px;font-weight:bold;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.25)}
+    /* small screens */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .wrap{grid-template-columns:1fr}
+      .process-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:520px){
+      .process-grid{grid-template-columns:1fr}
+      .brand h1{font-size:20px}
+      .hero h2{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <img src="https://i.postimg.cc/L4bcnS2b/logo-empresa.jpg" alt="BIOWASH logo">
+        <div>
+          <h1>BIOWASH</h1>
+          <div style="font-size:13px;color:rgba(11,107,58,0.75)">Lavado ecológico • sostenible</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#mision">Misión</a>
+        <a href="#vision">Visión</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#catalogo">Catálogo</a>
+        <button class="btn-primary" onclick="scrollToSection('contacto')">Contáctanos</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="hero">
+      <div class="hero-card fade-up">
+        <div class="title-frame">Servicio ecológico</div>
+        <h2>Lavado de ropa responsable y de alta calidad</h2>
+        <p class="lead">En BIOWASH cuidamos tus prendas y al planeta: productos biodegradables, menor consumo de agua y procesos pensados para ofrecer una experiencia cómoda, confiable y sostenible.</p>
+        <div class="actions">
+          <button class="btn-primary" onclick="scrollToSection('catalogo')">Ver catálogo</button>
+          <button class="outline" onclick="scrollToSection('proceso')">Ver proceso</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+        <div style="background:linear-gradient(135deg,var(--sky-blue),var(--green-light));padding:16px;border-radius:16px;box-shadow:var(--card-shadow);width:100%;text-align:center">
+          <h3 style="margin:0;color:var(--green-dark)">¿Por qué elegir BIOWASH?</h3>
+          <p style="margin:6px 0 0 0;font-size:14px;">Ahorro de recursos, cuidado para tus prendas y compromiso ecológico.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="mision">
+      <div class="wrap">
+        <div class="card">
+          <h3 class="title-frame">Misión</h3>
+          <p style="margin-top:12px">La misión de <strong>BIOWASH</strong> es ofrecer un servicio de lavado de ropa ecológico, eficiente y de alta calidad; usamos productos biodegradables y procesos que reducen el consumo de agua y energía, cuidando tanto prendas como al medio ambiente. Nuestro compromiso es brindar una experiencia responsable, cómoda y confiable a cada cliente.</p>
+        </div>
+        <div class="card">
+          <h3 class="title-frame">Visión</h3>
+          <p style="margin-top:12px">La visión de <strong>BIOWASH</strong> es convertirnos en una empresa líder de lavado ecológico en nuestra ciudad y, en el futuro, expandirnos a otras regiones. Queremos ser sinónimo de sostenibilidad, innovación y buen servicio, promoviendo el cuidado del planeta a través de acciones cotidianas que generen un impacto ambiental positivo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso">
+      <div class="card">
+        <h3 class="title-frame">Proceso de producción</h3>
+        <p style="margin-top:8px;color:#285b3b">La actividad comercial de BIOWASH es del sector terciario: realizamos procesos de higienización a prendas sin transformarlas.</p>
+        <div style="margin-top:14px" class="process-grid">
+          <div class="step">
+            <img src="https://i.postimg.cc/xCx1XZ13/paso-1.jpg" alt="Paso 1">
+            <strong>1. Clasificación</strong>
+            <div style="font-size:13px">Separar ropa de color y blanca para evitar daños.</div>
+          </div>
+          <div class="step">
+            <img src="https://i.postimg.cc/L5G4TZfq/paso-2.jpg" alt="Paso 2">
+            <strong>2. Remojo</strong>
+            <div style="font-size:13px">Dejar en remojo las prendas agregando detergente biodegradable.</div>
+          </div>
+          <div class="step">
+            <img src="https://i.postimg.cc/c48LJXyf/paso-3.jpg" alt="Paso 3">
+            <strong>3. Pre-enjuague</strong>
+            <div style="font-size:13px">Breve enjuague como prelavado.</div>
+          </div>
+          <div class="step">
+            <img src="https://i.postimg.cc/W1GpGz43/paso-4.jpg" alt="Paso 4">
+            <strong>4. Programar lavado</strong>
+            <div style="font-size:13px">Seleccionar ciclo apropiado según la prenda.</div>
+          </div>
+          <div class="step">
+            <img src="https://i.postimg.cc/LXXHFV3Y/paso-5.jpg" alt="Paso 5">
+            <strong>5. Introducir prenda</strong>
+            <div style="font-size:13px">Después de 5 minutos de remojo se introduce la prenda al lavado.</div>
+          </div>
+          <div class="step">
+            <img src="https://i.postimg.cc/HWF73JT4/paso-6.jpg" alt="Paso 6">
+            <strong>6. Secado</strong>
+            <div style="font-size:13px">Secado tradicional al aire libre para menor consumo energético.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalogo">
+      <div class="card">
+        <h3 class="title-frame">Catálogo BIOWASH</h3>
+        <p style="margin-top:10px">¡Descubre la magia del lavado de ropa! Bienvenido al catálogo de BioWash, donde encontrarás nuestros productos ecológicos para el cuidado y lavado de la ropa. Ofrecemos soluciones sostenibles que protegen el medio ambiente y cuidan tus prendas.</p>
+        <div class="catalog" style="margin-top:12px">
+          <div class="frame">
+            <img src="https://i.postimg.cc/W4zK2Yxv/Captura-de-pantalla-2025-09-18-143007.png" alt="Catálogo empresarial">
+          </div>
+          <div class="frame">
+            <img src="https://i.postimg.cc/BvzztcG1/Captura-de-pantalla-2025-09-18-143017.png" alt="Catálogo particular">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="card">
+        <h3 class="title-frame">Contáctanos</h3>
+        <p>¿Quieres más información o agendar un servicio? Escríbenos a <a href="mailto:biowash.contacto@gmail.com">biowash.contacto@gmail.com</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal para imágenes -->
+  <div class="overlay" id="imgOverlay">
+    <div class="modal">
+      <button class="close" onclick="closeModal()">×</button>
+      <img id="modalImg" src="" alt="Imagen ampliada">
+    </div>
+  </div>
+
+  <script>
+    // Scroll suave
+    function scrollToSection(id){
+      document.getElementById(id).scrollIntoView({behavior:"smooth"});
+    }
+
+    // Modal imágenes
+    const overlay = document.getElementById("imgOverlay");
+    const modalImg = document.getElementById("modalImg");
+
+    document.querySelectorAll("img").forEach(img => {
+      img.addEventListener("click", () => {
+        modalImg.src = img.src;
+        overlay.classList.add("open");
+      });
+    });
+
+    function closeModal(){
+      overlay.classList.remove("open");
+      modalImg.src = "";
+    }
+
+    overlay.addEventListener("click", e => {
+      if(e.target === overlay) closeModal();
+    });
+
+    document.addEventListener("keydown", e => {
+      if(e.key === "Escape") closeModal();
+    });
+  </script>
+</body>
+</html>
